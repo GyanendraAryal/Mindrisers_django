@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-
 # Create your views here.
 # def index(request):
 #     return HttpResponse("Welcome this is index page!")
-def index(request):
+
+
+def home(request):
     users = [
         {
             "id": 1,
@@ -153,12 +154,7 @@ def index(request):
         "title": "Index page",
         "users": users,
     }
-
-    return render(request, "index.html", context)
-
-
-def home(request):
-    return render(request, "home.html")
+    return render(request, "home.html", context)
 
 
 def contact(request):
