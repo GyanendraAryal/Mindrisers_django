@@ -1,0 +1,12 @@
+# TodoList
+#Note taking
+#Booking Keeping
+
+
+ ##TodoList
+ #Database Requirements
+    -id - Number
+    -title - Char
+    -description -Char
+    -status(flag) -Boolean
+    -end_by - DataTime
