@@ -10,3 +10,13 @@
     -description -Char
     -status(flag) -Boolean
     -end_by - DataTime
+
+
+
+#TodoList:
+    -title
+    -description
+    -status
+    -date
+
+#model class -> create migration file in migration folder -> database table creation
