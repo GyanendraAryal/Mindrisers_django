@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Task Title{% endblock title %}
+{%load static %}
+{% block body %}
+This is TodoList Page...
+<table class="table table-primary">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr>
+        {% comment %} forloop.counter {% endcomment %}
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{task.title}}</td>
+        {% comment %} <td> {% endcomment %}
+          {% comment %} {% if task.age < 18 %} Child {% elif user.age > 18 %} Adult
+          {{task.age}} {%endif %} {% endcomment %}
+        {% comment %} </td> {% endcomment %}
+        <td>{{task.description}}</td>
+        <td>
+            {% if task.status %}
+            <span class="text-green-500">Completed</span>
+            {% else %}
+            <span class="text-red-500">Pending</span>
+            {% endif %}
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock body %}

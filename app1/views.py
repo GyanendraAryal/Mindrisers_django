@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from . import models
 
 # Create your views here.
 # def index(request):
@@ -159,3 +160,10 @@ def home(request):
 
 def contact(request):
     return render(request, "contact.html")
+
+
+def task(request):
+    tasks = models.TodoList.objects.all()
+    # print(task)
+    context = {"tasks": tasks}
+    return render(request, "task.html", context)
