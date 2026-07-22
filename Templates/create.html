@@ -1,0 +1,131 @@
+
+{% extends "base.html" %}
+{% block title %}Add Task{% endblock title %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+                    <h3 class="mb-0">Add New Task</h3>
+                </div>
+
+                <div class="card-body p-4">
+
+                    {% if error %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{ error }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    {% endif %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <label for="title" class="form-label fw-semibold">
+                                Title
+                            </label>
+                            <input
+                                type="text"
+                                class="form-control form-control-lg"
+                                id="title"
+                                name="title"
+                                placeholder="Enter task title"
+                                aria-describedby="titleHelp"
+                            >
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="description" class="form-label fw-semibold">
+                                Description
+                            </label>
+                            <textarea
+                                class="form-control"
+                                id="description"
+                                name="description"
+                                rows="5"
+                                placeholder="Write task description..."
+                            ></textarea>
+                        </div>
+
+                        <div class="form-check form-switch mb-4">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="status"
+                                id="status"
+                                {% if task.status %}checked{% endif %}
+                            >
+                            <label class="form-check-label fw-semibold" for="status">
+                                Mark as Completed
+                            </label>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-3">
+                                Submit
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock body %}
+
+
+
+
+
+{% comment %} {% extends "base.html" %}
+{% block title %}Add Task{% endblock title %}
+{% block body %}
+<div class="container">
+        {% if error %}
+    <div class="alert alert-warning" role="alert">
+ {{error}}
+    </div>
+    {% endif %}
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        name="title"
+        aria-describedby="titleHelp"
+      />
+    </div>
+    <div class="form-floating">
+      <textarea
+        class="form-control"
+        placeholder="Leave a comment here"
+        id="description"
+        name="description"
+      ></textarea>
+      <label for="description">Description</label>
+    </div>
+    <div class="container">
+        <label for="status">Status: </label>
+        <input type="checkbox" name="status" id="status"
+        {% if task.status %}checked{% endif %}
+        >
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endblock body %}
+ {% endcomment %}
+
+
+
+

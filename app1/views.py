@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from . import models
+from .models import TodoList
 
 # Create your views here.
 # def index(request):
@@ -163,7 +163,55 @@ def contact(request):
 
 
 def task(request):
-    tasks = models.TodoList.objects.all()
+    tasks = TodoList.objects.all()
     # print(task)
     context = {"tasks": tasks}
     return render(request, "task.html", context)
+
+
+def create(request):
+    if request.method == "POST":
+        title = request.POST.get("title", "").strip()
+        description = request.POST.get("description", "").strip()
+        status = "status" in request.POST
+        if not title or not description:
+            context={
+                "error":"Both fields are required!!"
+            }
+            return render(request, "create.html", context)
+        else:
+            TodoList.objects.create(title=title, description=description, status=status)
+            return redirect("task")
+    return render(request, "create.html")
+
+
+def edit(request, id):
+    task = get_object_or_404(TodoList, id=id)
+    if request.method == "POST":
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        status = "status" in request.POST
+
+        task.title = title
+        task.description = description
+        task.status = status
+
+        task.save()
+
+        return HttpResponse("Task Updated successfully")
+    return render(request, "edit.html", {"task": task})
+
+
+def toggle(request,id):
+    task = get_object_or_404(TodoList, id=id)
+    if request.method == "POST":
+        task.status = not task.status
+        task.save()
+        return redirect("task")
+
+
+def delete(request,id):
+    context = {"message": "Todo Deleted Successfully"}
+    task= get_object_or_404(TodoList,id=id)
+    task.delete()
+    return redirect( "/task/")
