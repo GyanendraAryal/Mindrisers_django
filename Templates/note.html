@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Note Page{% endblock title %}
+{% block body %}
+
+<div class="container py-5">
+
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">Note List</h3>
+
+            <a href="{% url 'create_note' %}" class="btn btn-light">
+                + Add Note
+            </a>
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for note in notes %}
+                        <tr>
+
+                            <td>{{ forloop.counter }}</td>
+
+                            <td>{{ note.title }}</td>
+
+                            <td>{{ note.content }}</td>
+
+                            <td>
+                                {% if note.status %}
+                                    <span class="badge bg-success">Completed</span>
+                                {% else %}
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                {% endif %}
+
+                                <form method="POST"
+                                      action="{% url 'toggle_note' note.id %}"
+                                      class="mt-2">
+                                    {% csrf_token %}
+
+                                    <button type="submit" class="btn btn-sm btn-success">
+                                        {% if note.status %}
+                                            Mark Incomplete
+                                        {% else %}
+                                            Mark Complete
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            </td>
+
+                            <td class="text-center">
+
+                                <a href="{% url 'edit_note' note.id %}"
+                                   class="btn btn-outline-primary btn-sm">
+                                    Edit
+                                </a>
+
+                                <a href="{% url 'delete_note' note.id %}"
+                                   class="btn btn-outline-danger btn-sm">
+                                    Delete
+                                </a>
+
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock body %}

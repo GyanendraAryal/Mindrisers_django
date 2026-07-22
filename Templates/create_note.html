@@ -1,0 +1,81 @@
+
+{% extends "base.html" %}
+{% block title %}Add Note{% endblock title %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+                    <h3 class="mb-0">Add New Note</h3>
+                </div>
+
+                <div class="card-body p-4">
+
+                    {% if error %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{ error }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    {% endif %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <label for="title" class="form-label fw-semibold">
+                                Title
+                            </label>
+                            <input
+                                type="text"
+                                class="form-control form-control-lg"
+                                id="title"
+                                name="title"
+                                placeholder="Enter task title"
+                                aria-describedby="titleHelp"
+                            >
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="content" class="form-label fw-semibold">
+                                Content
+                            </label>
+                            <textarea
+                                class="form-control"
+                                id="content"
+                                name="content"
+                                rows="5"
+                                placeholder="Write note content..."
+                            ></textarea>
+                        </div>
+
+                        <div class="form-check form-switch mb-4">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="status"
+                                id="status"
+                                {% if note.status %}checked{% endif %}
+                            >
+                            <label class="form-check-label fw-semibold" for="status">
+                                Mark as Completed
+                            </label>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-3">
+                                Submit
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock body %}

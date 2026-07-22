@@ -211,7 +211,6 @@ def toggle(request,id):
 
 
 def delete(request,id):
-    context = {"message": "Todo Deleted Successfully"}
     task= get_object_or_404(TodoList,id=id)
     task.delete()
     return redirect( "/task/")
