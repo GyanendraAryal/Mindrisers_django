@@ -1,87 +1,54 @@
-{% extends "base.html" %} {% block title %} Index Page {% endblock title %}
+{% extends "base.html" %}
+{% block title %} Index Page {% endblock title %}
+{% load static %}
 
+{% block body %}
 <style>
-  .container {
-    margin-top: 2rem;
-    margin-left: 25%;
-    margin-bottom: 2rem;
+  /* Target the images directly inside the carousel items */
+  .carousel-item img {
+    height: 500px;         /* Set your preferred fixed desktop height here */
+    object-fit: cover;     /* Crops image proportionally instead of squeezing it */
   }
 
-  .table {
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    font-size: 0.95rem;
+  /* Responsive adjustment for small mobile screens */
+  @media (max-width: 768px) {
+    .carousel-item img {
+      height: 300px;       /* Shorter height for mobile screens */
+    }
   }
+</style> <!-- This closing tag fixes the blank page issue -->
 
-  .table thead th {
-    background-color: #2b4c7e !important; /* Rich Dark Blue */
-    color: #ffffff !important;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
-    padding: 1rem;
-    border: none;
-  }
-
-  .table tbody tr {
-    transition: background-color 0.2s ease-in-out;
-  }
-
-  .table tbody tr:nth-child(even) {
-    background-color: #f4f7fc;
-  }
-
-  .table tbody td,
-  .table tbody th {
-    padding: 1rem;
-    vertical-align: middle;
-    border-bottom: 1px solid #e2e8f0;
-    color: #334155;
-  }
-
-  .table tbody th[scope="row"] {
-    font-weight: 600;
-    color: #64748b;
-  }
-
-  .table tbody tr:hover {
-    background-color: #e0ebf7 !important;
-    cursor: pointer;
-  }
-</style>
-
-{%block body %}
-
-<div class="container">
-  <table class="table table-primary">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Age</th>
-        <th scope="col">Email</th>
-        <th scope="col">City</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for user in users %}
-      <tr>
-        {% comment %} forloop.counter {% endcomment %}
-        <th scope="row">{{forloop.counter}}</th>
-        <td>{{user.name}}</td>
-        <td>
-          {% if user.age < 18 %} Child {% elif user.age > 18 %} Adult
-          {{user.age}} {%endif %}
-        </td>
-        <td>{{user.email}}</td>
-        <td>{{user.city}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<div class="container my-4">
+  <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'images/hero1.png' %}" class="d-block w-100" alt="Hero 1" />
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/hero2.png' %}" class="d-block w-100" alt="Hero 2" />
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/hero3.png' %}" class="d-block w-100" alt="Hero 3" />
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExample"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExample"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 </div>
 {% endblock body %}

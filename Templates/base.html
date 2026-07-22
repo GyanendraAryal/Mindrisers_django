@@ -10,40 +10,67 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
-      .nav-items {
-        padding: 0;
-        margin: 0;
-      }
-      .nav-items {
-        display: flex;
-        height: 3em;
-        background: orange;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        gap: 2rem;
-        list-style: none;
-      }
-
-      .nav-items li {
-        cursor: pointer;
-      }
-    </style>
   </head>
   <body>
     <header>
-      <nav>
-        <ul class="nav-items">
-          <li>Home</li>
-          <li>About</li>
-          <li>Services</li>
-          <li>Contact</li>
-        </ul>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{%url "home"%}">Navbar</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{%url "home"%}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{%url "task"%}">Task</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
       </nav>
     </header>
     {% block body %}{% endblock body %} {% comment %} {% endcomment %}
@@ -53,6 +80,7 @@
       crossorigin="anonymous"
     ></script>
   </body>
+  {% comment %}
   <script>
     const list-items = document.querySelectorAll("li")
     list-items.map((item)=>{
@@ -61,4 +89,5 @@
     })
     })
   </script>
+  {% endcomment %}
 </html>
